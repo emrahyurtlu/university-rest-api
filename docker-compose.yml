@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  database:
+    image: postgres:9.6
+    restart: always
+    environment:
+      POSTGRES_DB: universitydb
+      POSTGRES_USER: usr_uni
+      POSTGRES_PASSWORD: usr_uni_pass
+    container_name: 'university_db_pg_96'
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8090
