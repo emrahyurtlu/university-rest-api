@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "EXAM_TYPE")
 @XmlRootElement
-public class ExamType {
+public class ExamType implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EXAM_TYPE_SEQ")
     @Column(name = "EXAM_TYPE_ID")

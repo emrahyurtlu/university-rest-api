@@ -7,7 +7,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "DEPARTMENT")
 @XmlRootElement
-public class Department {
+public class Department implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DEPARTMENT_SEQ")
     @Column(name = "DEPARTMENT_ID")
