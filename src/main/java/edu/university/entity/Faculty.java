@@ -17,8 +17,8 @@ public class Faculty {
     @Column(name = "FACULTY_NAME", nullable = false)
     private String facultyName;
 
+    @OneToOne
     @JoinColumn(name = "FACULTY_DEAN_ID", nullable = false)
-    @OneToOne(mappedBy = "lecturerId", cascade = {CascadeType.ALL})
     private Lecturer facultyDean;
 
     @OneToMany

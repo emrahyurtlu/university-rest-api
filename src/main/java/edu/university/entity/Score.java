@@ -1,24 +1,27 @@
 package edu.university.entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Table(name = "SCORES")
+@XmlRootElement
 public class Score {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SCORE_SEQ")
     @Column(name = "SCORE_ID")
-    private Integer gradeId;
+    private Integer scoreId;
 
-    @JoinColumn(name = "STUDENT_ID")
     @OneToOne
+    @JoinColumn(name = "STUDENT_ID")
     private Student student;
 
-    @JoinColumn(name = "COURSE_ID")
     @OneToOne
+    @JoinColumn(name = "COURSE_ID")
     private Course course;
 
-    @JoinColumn(name = "EXAM_TYPE_ID")
     @OneToOne
+    @JoinColumn(name = "EXAM_TYPE_ID")
     private ExamType examType;
 
     @Column(name = "SCORE")
@@ -27,20 +30,20 @@ public class Score {
     public Score() {
     }
 
-    public Score(Integer gradeId, Student student, Course course, ExamType examType, double grade) {
-        this.gradeId = gradeId;
+    public Score(Integer scoreId, Student student, Course course, ExamType examType, double score) {
+        this.scoreId = scoreId;
         this.student = student;
         this.course = course;
         this.examType = examType;
-        this.score = grade;
+        this.score = score;
     }
 
-    public Integer getGradeId() {
-        return gradeId;
+    public Integer getScoreId() {
+        return scoreId;
     }
 
-    public void setGradeId(Integer gradeId) {
-        this.gradeId = gradeId;
+    public void setScoreId(Integer gradeId) {
+        this.scoreId = gradeId;
     }
 
     public Student getStudent() {
@@ -77,8 +80,8 @@ public class Score {
 
     @Override
     public String toString() {
-        return "Grade{" +
-                "gradeId=" + gradeId +
+        return "Score{" +
+                "scoreId=" + scoreId +
                 ", student=" + student +
                 ", course=" + course +
                 ", examType=" + examType +

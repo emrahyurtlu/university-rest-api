@@ -20,18 +20,18 @@ public class Student {
     @Column(name = "STUDENT_NAME")
     private String studentName;
 
-    @JoinColumn(name = "STUDENT_DEPARTMENT_ID")
     @OneToOne
+    @JoinColumn(name = "STUDENT_DEPARTMENT_ID")
     private Department department;
 
+    @OneToMany
     @JoinTable(name = "STUDENT_COURSES", joinColumns = @JoinColumn(name = "STUDENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
-    @OneToMany
     private Collection<Course> courses = new ArrayList<>();
 
+    @OneToMany
     @JoinTable(name = "STUDENT_SCORES", joinColumns = @JoinColumn(name = "STUDENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "SCORE_ID"))
-    @OneToMany
     private Collection<Score> scores = new ArrayList<>();
 
     public Student() {

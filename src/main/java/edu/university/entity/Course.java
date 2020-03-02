@@ -18,17 +18,22 @@ public class Course {
     @Column(name = "COURSE_CODE", nullable = false)
     private String courseCode;
 
-    @OneToOne(mappedBy = "departmentId")
+    @OneToOne
     @JoinColumn(name = "COURSE_DEPARTMENT_ID")
     private Department courseDepartment;
+
+    @OneToOne
+    @JoinColumn(name = "COURSE_TERM_ID")
+    private Term term;
 
     public Course() {
     }
 
-    public Course(String courseName, String courseCode, Department courseDepartment) {
+    public Course(String courseName, String courseCode, Department courseDepartment, Term term) {
         this.courseName = courseName;
         this.courseCode = courseCode;
         this.courseDepartment = courseDepartment;
+        this.term = term;
     }
 
     public Integer getCourseId() {
@@ -71,5 +76,13 @@ public class Course {
                 ", courseCode='" + courseCode + '\'' +
                 ", courseDepartment=" + courseDepartment +
                 '}';
+    }
+
+    public Term getTerm() {
+        return term;
+    }
+
+    public void setTerm(Term term) {
+        this.term = term;
     }
 }

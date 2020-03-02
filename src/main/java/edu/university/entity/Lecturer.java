@@ -20,12 +20,13 @@ public class Lecturer {
     @Column(name = "LECTURER_TITLE", nullable = false)
     private String lecturerTitle;
 
-    @JoinColumn(name = "LECTURER_DEPARTMENT_ID", columnDefinition = "Akademisyenin kadrosunun bulunduğu departman")
-    @OneToOne(mappedBy = "DEPARTMENT_ID")
+    @OneToOne
+    @JoinColumn(name = "LECTURER_DEPARTMENT_ID")
     private Department department;
 
     @OneToMany
-    @JoinTable(name = "LECTURER_DEPARTMENTS", joinColumns = @JoinColumn(name = "LECTURER_ID"), inverseJoinColumns = @JoinColumn(name = "DEPARTMENT_ID"))
+    @JoinTable(name = "LECTURER_DEPARTMENTS", joinColumns = @JoinColumn(name = "LECTURER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "DEPARTMENT_ID"))
     private Collection<Department> lecturerDepartments = new ArrayList<>();
 
     public Lecturer() {

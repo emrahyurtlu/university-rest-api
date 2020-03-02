@@ -2,9 +2,7 @@ package edu.university.entity;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "DEPARTMENT")
@@ -18,28 +16,17 @@ public class Department {
     @Column(name = "DEPARTMENT_NAME", nullable = false)
     private String departmentName;
 
-    @Column(name = "DEPARTMENT_MANAGER_ID")
-    @OneToOne(mappedBy = "lecturerId")
+    @OneToOne
+    @JoinColumn(name = "DEPARTMENT_MANAGER_ID")
     private Lecturer departmentManager;
 
     @Column(name = "DEPARTMENT_DESCRIPTION")
     private String departmentDescription;
 
-    @OneToMany(mappedBy = "courseId", targetEntity = Course.class, cascade = {CascadeType.ALL})
+    @OneToMany
     @JoinTable(name = "DEPARTMENT_COURSES", joinColumns = @JoinColumn(name = "DEPARTMENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
     private Collection<Course> departmentCourses;
-
-    public Department() {
-        departmentCourses = new ArrayList<>();
-    }
-
-    public Department(String departmentName, Lecturer departmentManager, String departmentDescription, List<Course> departmentCourses) {
-        this.departmentName = departmentName;
-        this.departmentManager = departmentManager;
-        this.departmentDescription = departmentDescription;
-        this.departmentCourses = departmentCourses;
-    }
 
     public Integer getDepartmentId() {
         return departmentId;
