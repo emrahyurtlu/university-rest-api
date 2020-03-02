@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "COURSE")
 @XmlRootElement
-public class Course implements BaseEntity {
+public class Course extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COURSE_SEQ")
     @Column(name = "COURSE_ID")

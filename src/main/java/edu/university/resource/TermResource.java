@@ -1,6 +1,5 @@
 package edu.university.resource;
 
-import edu.university.entity.BaseEntity;
 import edu.university.entity.Term;
 import edu.university.repository.TermRepo;
 
@@ -20,16 +19,8 @@ public class TermResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String get() {
-        Term first = (Term) termRepo.get(1);
-        System.out.println(first);
-        BaseEntity latest = termRepo.insert(new Term("aa"));
-        System.out.println(latest);
-        System.out.println(termRepo.getList());
-        first.setTermName("ww");
-        termRepo.update(first);
-        System.out.println(termRepo.getList());
-        Term second = (Term) termRepo.get(2);
-        termRepo.delete(second);
+        Term term = termRepo.get(1);
+        termRepo.delete(term);
         System.out.println(termRepo.getList());
         return "Get all terms!";
     }

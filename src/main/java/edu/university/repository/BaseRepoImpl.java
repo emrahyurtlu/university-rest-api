@@ -1,26 +1,33 @@
 package edu.university.repository;
 
-import edu.university.entity.BaseEntity;
+import edu.university.entity.AbstractEntity;
 import edu.university.util.HibernateUtil;
 import org.hibernate.Session;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class BaseRepoImpl<T extends BaseEntity> implements BaseRepo<T> {
+public abstract class BaseRepoImpl<T extends AbstractEntity> implements IBaseRepo<T> {
+    private Class<T> entityType;
     private Session session;
 
-    public BaseRepoImpl() {
+    BaseRepoImpl(Class<T> entityType) {
         this.session = HibernateUtil.getSessionFactory().openSession();
+        this.entityType = entityType;
     }
 
     @Override
     public T get(Integer id) {
-        return session.find(Class.forName(T), id);
+        return session.find(entityType, id);
     }
 
     @Override
     public List<T> getList() {
-        return session.createQuery("FROM " + BaseRepoImpl.class).getResultList();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = builder.createQuery(entityType);
+        criteriaQuery.from(entityType);
+        return session.createQuery(criteriaQuery).getResultList();
     }
 
     @Override
@@ -32,11 +39,11 @@ public class BaseRepoImpl<T extends BaseEntity> implements BaseRepo<T> {
     }
 
     @Override
-    public T update(BaseEntity entity) {
+    public T update(T entity) {
         session.beginTransaction();
         session.update(entity);
         session.getTransaction().commit();
-        return (T) entity;
+        return entity;
     }
 
     @Override

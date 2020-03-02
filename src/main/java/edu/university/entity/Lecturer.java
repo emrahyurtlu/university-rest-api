@@ -8,7 +8,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "LECTURER")
 @XmlRootElement
-public class Lecturer implements BaseEntity {
+public class Lecturer extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LECTURER_SEQ")
     @Column(name = "LECTURER_ID")

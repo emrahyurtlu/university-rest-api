@@ -1,10 +1,10 @@
 package edu.university.repository;
 
-import edu.university.entity.BaseEntity;
+import edu.university.entity.AbstractEntity;
 
 import java.util.List;
 
-public interface BaseRepo<T extends BaseEntity> {
+public interface IBaseRepo<T extends AbstractEntity> {
     T get(Integer id);
 
     List<T> getList();
