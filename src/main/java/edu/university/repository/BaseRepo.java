@@ -4,7 +4,7 @@ import edu.university.entity.AbstractEntity;
 
 import java.util.List;
 
-public interface IBaseRepo<T extends AbstractEntity> {
+public interface BaseRepo<T extends AbstractEntity> {
     T get(Integer id);
 
     List<T> getList();

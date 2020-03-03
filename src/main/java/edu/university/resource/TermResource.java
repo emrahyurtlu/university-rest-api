@@ -3,13 +3,14 @@ package edu.university.resource;
 import edu.university.entity.Term;
 import edu.university.repository.TermRepo;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("terms")
-public class TermResource {
+@Produces(MediaType.APPLICATION_JSON)
+public class TermResource implements BaseResource<Term> {
+
     private TermRepo termRepo;
 
     public TermResource() {
@@ -17,11 +18,39 @@ public class TermResource {
     }
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String get() {
-        Term term = termRepo.get(1);
+    @Override
+    public List<Term> getList() {
+        return termRepo.getList();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Override
+    public Term getById(@PathParam("id") Integer id) {
+        System.out.println("Term: getById çalıştı");
+        return termRepo.get(id);
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Override
+    public Term insert(Term entity) {
+        return termRepo.insert(entity);
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Override
+    public Term update(Term entity) {
+        return termRepo.update(entity);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Override
+    public Term delete(@PathParam("id") Integer id) {
+        Term term = termRepo.get(id);
         termRepo.delete(term);
-        System.out.println(termRepo.getList());
-        return "Get all terms!";
+        return term;
     }
 }

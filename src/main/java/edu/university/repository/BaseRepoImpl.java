@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public abstract class BaseRepoImpl<T extends AbstractEntity> implements IBaseRepo<T> {
+public abstract class BaseRepoImpl<T extends AbstractEntity> implements BaseRepo<T> {
     private Class<T> entityType;
     private Session session;
 
