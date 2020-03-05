@@ -20,9 +20,9 @@ public class Lecturer extends AbstractEntity {
     @Column(name = "LECTURER_TITLE", nullable = false)
     private String lecturerTitle;
 
-    @OneToOne
+    /*@OneToOne
     @JoinColumn(name = "LECTURER_DEPARTMENT_ID")
-    private Department department;
+    private Department department;*/
 
     @OneToMany
     @JoinTable(name = "LECTURER_DEPARTMENTS", joinColumns = @JoinColumn(name = "LECTURER_ID"),
@@ -32,10 +32,10 @@ public class Lecturer extends AbstractEntity {
     public Lecturer() {
     }
 
-    public Lecturer(String lecturerName, String lecturerTitle, Department department, Collection<Department> lecturerDepartments) {
+    public Lecturer(String lecturerName, String lecturerTitle, Collection<Department> lecturerDepartments) {
         this.lecturerName = lecturerName;
         this.lecturerTitle = lecturerTitle;
-        this.department = department;
+        //this.department = department;
         this.lecturerDepartments = lecturerDepartments;
     }
 
@@ -63,14 +63,6 @@ public class Lecturer extends AbstractEntity {
         this.lecturerTitle = lecturerTitle;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
     public Collection<Department> getLecturerDepartments() {
         return lecturerDepartments;
     }
@@ -85,7 +77,6 @@ public class Lecturer extends AbstractEntity {
                 "lecturerId=" + lecturerId +
                 ", lecturerName='" + lecturerName + '\'' +
                 ", lecturerTitle='" + lecturerTitle + '\'' +
-                ", department=" + department +
                 ", lecturerDepartments=" + lecturerDepartments +
                 '}';
     }
